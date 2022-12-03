@@ -1,0 +1,66 @@
+{
+  "services": [
+    {
+      "namespace": "WGS84",
+      "url": "/geoserver39",
+      "layers": [
+        {
+          "name": "FW84",
+          "searchKeys": [
+            {
+              "title": "编号",
+              "fieldName": "OBJECTID",
+              "input": ""
+            },
+            {
+              "title": "权利人",
+              "fieldName": "QLR",
+              "input": ""
+            }
+          ],
+          "showSelectedAttrOnly": true,
+          "selectedAttributes": [
+            {
+              "title": "编号",
+              "fieldName": "OBJECTID"
+            },
+            {
+              "title": "权利人",
+              "fieldName": "QLR"
+            },
+            {
+              "title": "房屋面积",
+              "fieldName": "FWMJ"
+            }
+          ]
+        },
+        {
+          "name": "L84",
+          "searchKeys": [
+            {
+              "title": "编号",
+              "fieldName": "Id",
+              "input": ""
+            },
+            {
+              "title": "名称",
+              "fieldName": "name",
+              "input": ""
+            }
+          ],
+          "showSelectedAttrOnly": true,
+          "selectedAttributes": [
+            {
+              "title": "编号",
+              "fieldName": "Id"
+            },
+            {
+              "title": "名称",
+              "fieldName": "name"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

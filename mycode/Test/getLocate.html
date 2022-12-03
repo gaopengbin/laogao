@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.8.0/leaflet.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.8.0/leaflet.min.css" rel="stylesheet">
+</head>
+<style>
+    html,
+    body,
+    #mymap {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<body>
+    <div id="mymap"></div>
+</body>
+<script>
+    getLocation()
+    function getLocation() {
+        var options = {
+            enableHighAccuracy: true,
+            maximumAge: 1000
+        }
+        if (navigator.geolocation) {
+            //浏览器支持geolocation
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+        } else {
+            //浏览器不支持geolocation
+        }
+    }
+    function onSuccess(pos) {
+        console.log('经度：' + pos.coords.longitude + '纬度：' + pos.coords.latitude)
+        let marker= L.marker([pos.coords.latitude, pos.coords.longitude])
+        marker.addTo(mymap);
+        mymap.flyTo(marker._latlng,16)
+    }
+    function onError(error) {
+        switch (error.code) {
+            case 1:
+                alert('位置服务被拒绝');
+                break;
+            case 2:
+                alert('暂时获取不到位置信息');
+                break;
+            case 3:
+                alert('获取信息超时');
+                break;
+            case 4:
+                alert('未知错误');
+                break;
+        }
+
+    }
+
+    var mymap = L.map('mymap', {
+        // crs: L.CRS.EPSG4326,
+        // center: [39.89854, 116.3347],//中心坐标
+        // zoom: 10,//缩放级别
+        // minZoom: 3,
+        // maxZoom: 14,
+        // zoomControl: true, //缩放组件
+    }).setView([21.0838183398, 106.31677428300736], 8);
+
+    var baseLayers = {
+        '高德': L.tileLayer('http://wprd04.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}', {
+            maxZoom: 18
+        }).addTo(mymap),
+
+        "CartoDB Positron": L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            maxZoom: 18
+        }),
+
+        "OSM": L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18
+        }),
+
+        "OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18
+        }),
+    }
+    var layerControl = L.control.layers(baseLayers, {}, {
+        position: 'topleft',
+        collapsed: true
+    }).addTo(mymap);
+</script>
+
+
+</html>

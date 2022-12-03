@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取照片信息</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/photo-sphere-viewer.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uevent@2/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/photo-sphere-viewer.min.js"></script>
+    <script src='http://120.48.115.17:8080/data/EPSPlanet_SDK/XbsjEarth/XbsjEarth.js'></script>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .photoList {
+            position: absolute;
+            /* left: 50%; */
+            bottom: 200px;
+            width: 100%;
+            height: 100px;
+
+            text-align: center;
+        }
+
+        .photoList div {
+
+            width: auto;
+        }
+
+        .photoList li {
+            display: inline-flex;
+            /* width: 120px;
+            height: 120px; */
+            background-color: rgba(135, 138, 138, 1);
+            padding: 5px;
+            transition: 0.2s;
+        }
+
+        .photoList li img {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            scale: 1.2;
+        }
+
+        li span {
+            display: block;
+            position: absolute;
+            background-color: rgba(135, 138, 138, 1);
+            color: aliceblue;
+            bottom: 0;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" id="file-input" />
+
+    <!-- <div id="image"></div> -->
+    <!-- <textarea name="" id="info" cols="30" rows="10"></textarea> -->
+    <div style="width: 100%;height:100%;display: flex;">
+        <div id='earthContainer' style='width: 50%; height: 90%;display: inline-block;'></div>
+        <div id="viewer" style="width: 50%; height: 90%;display: inline-block;"></div>
+    </div>
+    <div class="photoList">
+        <!-- <div> -->
+            <li>
+                <img src="http://localhost:4000/%E5%9C%B0%E7%90%83.jpg" alt="">
+                <span>场景1</span>
+            </li>
+            <li>
+                <img src="http://localhost:4000/%E5%9C%B0%E7%90%83.jpg" alt="">
+                <span>场景二</span>
+            </li>
+            <li>
+                <img src="http://localhost:4000/%E5%9C%B0%E7%90%83.jpg" alt="">
+                <span>场景3</span>
+            </li>
+        <!-- </div> -->
+
+    </div>
+</body>
+<script>
+    let earth;
+    XE.ready().then(() => {
+        // 1.1 创建地球
+        earth = new XE.Earth('earthContainer');
+        // only for Debug
+        window.earth = earth;
+        earth.sceneTree.root.children.push({
+            czmObject: {
+                "xbsjType": "Imagery",
+                "xbsjGuid": "41f7f98c-5c95-4e96-b67e-ccf5ece0920d",
+                "name": "天地图影像",
+                "xbsjImageryProvider": {
+                    "XbsjImageryProvider": {
+                        "url": "http://t6.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=cf7c0b94d43b4d5e1f27a5712b147c70"
+                    },
+                    "UrlTemplateImageryProvider": {},
+                    "WebMapServiceImageryProvider": {},
+                    "WebMapTileServiceImageryProvider": {},
+                    "ArcGisMapServerImageryProvider": {},
+                    "GoogleEarthEnterpriseImageryProvider": {},
+                    "createTileMapServiceImageryProvider": {}
+                }
+            }
+        }, {
+            czmObject: {
+                "xbsjType": "Terrain",
+                "xbsjGuid": "d47253ba-f703-4282-92fd-0a5de4ebeb9a",
+                "name": "全球14级地形",
+                "xbsjTerrainProvider": {
+                    "type": "XbsjCesiumTerrainProvider",
+                    "XbsjEllipsoidTerrainProvider": {},
+                    "XbsjCesiumTerrainProvider": {
+                        "url": "http://www.supermapol.com/realspace/services/3D-stk_terrain/rest/realspace/datas/info/data/path",
+                        "requestVertexNormals": true,
+                        "requestWaterMask": true
+                    },
+                    "GoogleEarthEnterpriseTerrainProvider": {}
+                }
+            }
+        }, {
+            "czmObject": {
+                "xbsjType": "Tileset",
+                "xbsjGuid": "a0b97c97-89ba-41c5-a58e-9210b62ae6cc",
+                "name": "新建倾斜V3",
+                "url": "http://localhost:9030/model/d2aeb8f033d511edb91bc9db98980c8e/tileset.json",
+                "xbsjPosition": [
+                    2.2008646862494814,
+                    1.2189183380537552,
+                    146.9999999965875
+                ],
+                "xbsjFlattenGuid": "38a2f367-e990-418e-9243-311129668137",
+                "xbsjClippingPlanes": {},
+                "xbsjCustomShader": {}
+            }
+        })
+    })
+    const viewer = new PhotoSphereViewer.Viewer({
+        container: document.querySelector('#viewer'),
+
+    });
+    viewer.on('position-updated', (e, position) => {
+        console.log(e, position)
+        earth.camera.rotation[0] = position.longitude
+        earth.camera.rotation[1] = position.latitude
+    })
+
+    console.log(viewer)
+    window.viewer = viewer
+    document.getElementById("file-input").onchange = function (img) {
+        imgFile = img;
+        var allFiles = imgFile.target.files;
+        var laltest = "";
+        // length_lal++;
+        var imgarr = new Array();
+        var tmpimg = allFiles[0];
+        // imgarr[i] = allFiles[0];
+        var readImg = new FileReader();
+        readImg.readAsDataURL(tmpimg);
+        readImg.onload = function (readEvent) {
+            var base64 = readEvent.target.result;
+            // var appd = `<img src="${base64}" width="200px" height="200px">`;
+            // $("#image").append(appd);
+            viewer.setPanorama(base64)
+        };
+
+        EXIF.getData(tmpimg, function () {
+            var imgname = tmpimg.name;
+            console.log(tmpimg, EXIF)
+            var tagj = EXIF.getTag(tmpimg, 'GPSLongitude');
+            var tagw = EXIF.getTag(tmpimg, 'GPSLatitude');
+            var height = EXIF.getTag(tmpimg, 'GPSAltitude');
+            console.log(tagj, tagw, height)
+            var longitude = tagj[0] + tagj[1] / 60 + tagj[2] / 60 / 60;
+            var latitude = tagw[0] + tagw[1] / 60 + tagw[2] / 60 / 60;
+            let lalinfo = imgname + ":" + longitude + ":" + latitude + "," + height;
+            let poi = new XE.Obj.Pin(earth);
+            poi.position = [
+                (longitude / 180) * Math.PI,
+                (latitude / 180) * Math.PI,
+                height,
+            ];
+            earth.czm.viewer.camera.setView({
+                destination: Cesium.Cartesian3.fromDegrees(longitude, latitude, height),
+                orientation: {
+                    pitch: 0
+                }
+
+            })
+            viewer.on('zoom-updated', (e, level) => {
+                console.log(e, level)
+                earth.camera.position[2] = height - height * (level / 180)
+            })
+            // earth.camera.rotation[1] = 0
+            // poi.flyTo();
+            // $("#info").text(lalinfo)
+            // alert(lalinfo);
+        });
+
+    } 
+</script>
+
+</html>

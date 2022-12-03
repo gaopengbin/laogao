@@ -1,0 +1,39 @@
+{
+  "modelList": [
+    {
+      "czmObject": {
+        "name": "飞机",
+        "xbsjType": "Model",
+        "url": "http://jojo1986.cn:2020/data/models/%E9%A3%9E%E6%9C%BA%E5%8F%8A%E8%88%AA%E7%A9%BA/%E5%AE%A2%E6%9C%BA/%E5%AE%A2%E6%9C%BA.glb"
+      }
+    },
+    {
+      "czmObject": {
+        "name": "无人机",
+        "xbsjType": "Model",
+        "url": "http://jojo1986.cn:2020/data/models/%E9%A3%9E%E6%9C%BA%E5%8F%8A%E8%88%AA%E7%A9%BA/%E6%97%A0%E4%BA%BA%E6%9C%BA/%E6%97%A0%E4%BA%BA%E6%9C%BA.glb"
+      }
+    },
+    {
+      "czmObject": {
+        "name": "小汽车",
+        "xbsjType": "Model",
+        "url": "http://jojo1986.cn:2020/data/models/%E8%BD%A6%E8%BE%86/%E5%B0%8F%E6%B1%BD%E8%BD%A6/%E5%B0%8F%E6%B1%BD%E8%BD%A6.gltf"
+      }
+    },
+    {
+      "czmObject": {
+        "name": "警车",
+        "xbsjType": "Model",
+        "url": "http://jojo1986.cn:2020/data/models/车辆/警车/警车.gltf"
+      }
+    },
+    {
+      "czmObject": {
+        "name": "汽车",
+        "xbsjType": "Model",
+        "url": "http://jojo1986.cn:2020/data/models/%E8%BD%A6%E8%BE%86/%E6%B1%BD%E8%BD%A6_27/%E6%B1%BD%E8%BD%A6_27.gltf"
+      }
+    }
+  ]
+}

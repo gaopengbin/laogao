@@ -1,0 +1,19 @@
+{
+    "layers": [
+        {
+            "name": "安防点",
+            "geometry_name": "the_geom",
+            "url": "/geoserver39/2dd391dcc4fa481bb982092c52a77a8b/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=2dd391dcc4fa481bb982092c52a77a8b%3A1_P_EPSNet_网络数据集1&outputFormat=application%2Fjson&SRS=EPSG%3A4550"
+        },
+        {
+            "name": "给水管线点",
+            "geometry_name": "the_geom",
+            "url": "/geoserver39/2dd391dcc4fa481bb982092c52a77a8b/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=2dd391dcc4fa481bb982092c52a77a8b%3A1_P_EPSNet_网络数据集1&outputFormat=application%2Fjson"
+        },
+        {
+            "name": "中水点",
+            "geometry_name": "the_geom",
+            "url": "/geoserver39/2dd391dcc4fa481bb982092c52a77a8b/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=2dd391dcc4fa481bb982092c52a77a8b%3A1_P_EPSNet_网络数据集1&outputFormat=application%2Fjson"
+        }
+    ]
+}

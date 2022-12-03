@@ -1,0 +1,14 @@
+{
+    "pipeLine": [
+        {
+            "name": "管线1",
+            "url": "/geoserver39/2dd391dcc4fa481bb982092c52a77a8b/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=2dd391dcc4fa481bb982092c52a77a8b%3A1_L_EPSNet_网络数据集1&outputFormat=application%2Fjson"
+        }
+    ],
+    "pipePoint": [
+        {
+            "name": "管点1",
+            "url": "/geoserver39/2dd391dcc4fa481bb982092c52a77a8b/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=2dd391dcc4fa481bb982092c52a77a8b%3A1_P_EPSNet_网络数据集1&outputFormat=application%2Fjson"
+        }
+    ]
+}
