@@ -1,6 +1,0 @@
-{
-    "serverWfs": [
-        "/geoserver39/2dd391dcc4fa481bb982092c52a77a8b/wfs?service=wfs&request=GetFeature&version=1.1.0&outputFormat=application/json&TYPENAME=2dd391dcc4fa481bb982092c52a77a8b%3A1_L_EPSNet_1_L二维服务&CQL_FILTER=",
-        "/geoserver39/2dd391dcc4fa481bb982092c52a77a8b/wfs?service=wfs&request=GetFeature&version=1.1.0&outputFormat=application/json&TYPENAME=2dd391dcc4fa481bb982092c52a77a8b%3A1_L_EPSNet_1_L二维服务&CQL_FILTER="
-    ]
-}
